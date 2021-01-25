@@ -1,13 +1,15 @@
 import { User } from "src/users/user.entity";
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn,
-  ManyToOne,
+  Entity,
   JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
+import { PostToFlair } from "./postToFlair.entity";
 
 @Entity({ name: "posts" })
 export class Post {
@@ -23,6 +25,9 @@ export class Post {
   @ManyToOne(() => User, (user) => user.posts, { onDelete: "CASCADE" })
   @JoinColumn({ name: "author_id" })
   author: User;
+
+  @OneToMany(() => PostToFlair, (postToFlair) => postToFlair.post)
+  public postToFlairs: PostToFlair[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

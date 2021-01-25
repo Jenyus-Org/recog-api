@@ -1,7 +1,9 @@
+import { PostToFlair } from "src/posts/postToFlair.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -16,6 +18,9 @@ export class Flair {
 
   @Column()
   color: string;
+
+  @OneToMany(() => PostToFlair, (postToFlair) => postToFlair.flair)
+  public postToFlairs: PostToFlair[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
