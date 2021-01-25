@@ -16,11 +16,11 @@ export class PostToFlair {
 
   @ManyToOne(() => Post, (post) => post.postToFlairs)
   @JoinColumn({ name: "post_id" })
-  public post: Post;
+  post: Post;
 
   @ManyToOne(() => Flair, (flair) => flair.postToFlairs)
   @JoinColumn({ name: "flair_id" })
-  public flair: Flair;
+  flair: Flair;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

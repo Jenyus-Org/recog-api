@@ -20,7 +20,7 @@ export class Flair {
   color: string;
 
   @OneToMany(() => PostToFlair, (postToFlair) => postToFlair.flair)
-  public postToFlairs: PostToFlair[];
+  postToFlairs: PostToFlair[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

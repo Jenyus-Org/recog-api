@@ -27,7 +27,7 @@ export class Post {
   author: User;
 
   @OneToMany(() => PostToFlair, (postToFlair) => postToFlair.post)
-  public postToFlairs: PostToFlair[];
+  postToFlairs: PostToFlair[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
