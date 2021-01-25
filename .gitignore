@@ -34,3 +34,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 tmp/data.sqlite
 ormconfig.json
+.npmrc
