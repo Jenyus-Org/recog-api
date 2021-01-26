@@ -12,10 +12,4 @@ export class UsersController {
     const user = await this.usersService.findOne({ username });
     return user && new UserDto(user);
   }
-
-  @Post("/register")
-  async register(@Body() registerInput: RegisterUserDto) {
-    const user = await this.usersService.create(registerInput);
-    return new UserDto(user);
-  }
 }
