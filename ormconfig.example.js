@@ -5,7 +5,7 @@ module.exports = {
   synchronize: true,
   entities: [join(__dirname, "**", "*.entity.{ts,js}")],
   database: "tmp/data.sqlite",
-  migrations: ["src/database/migrations/*.ts"],
+  migrations: [join(__dirname, "database", "migrations", "**", "*.ts")],
   cli: {
     migrationsDir: "src/database/migrations",
   },
