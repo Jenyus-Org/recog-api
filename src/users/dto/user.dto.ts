@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Expose } from "class-transformer";
 import { User } from "../user.entity";
 
@@ -11,17 +12,21 @@ export class UserDto {
 
   @Field(() => ID)
   @Expose()
+  @ApiProperty()
   readonly id: string;
 
   @Field()
   @Expose()
+  @ApiProperty()
   readonly username: string;
 
   @Field()
   @Expose()
+  @ApiProperty()
   readonly firstName: string;
 
   @Field()
   @Expose()
+  @ApiProperty()
   readonly lastName: string;
 }
