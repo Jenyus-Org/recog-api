@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppResolver } from "./app.resolver";
 import { AppService } from "./app.service";
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -13,6 +14,7 @@ import { AppService } from "./app.service";
       installSubscriptionHandlers: true,
       autoSchemaFile: "schema.gql",
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
