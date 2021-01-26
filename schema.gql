@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  username: String!
+  firstName: String!
+  lastName: String!
+}
+
 type Query {
   hello: String!
+  user(username: String, id: String): User
+}
+
+type Mutation {
+  register(input: RegisterUserInput!): User!
+}
+
+input RegisterUserInput {
+  username: String!
+  password: String!
 }
