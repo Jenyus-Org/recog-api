@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { RegisterUserInput } from "./input/registerUser.input";
+import { RegisterUserInput } from "./input/register-user.input";
 import { User } from "./user.entity";
 
 interface FindOneArgs {
@@ -20,7 +20,10 @@ export class UsersService {
     if (id) {
       return await this.usersRepository.findOne(id);
     } else if (username) {
-      return await this.usersRepository.findOne({ username });
+      return await this.usersRepository
+        .createQueryBuilder()
+        .where("LOWER(username) = LOWER(:username)", { username })
+        .getOne();
     } else {
       throw new Error("One of ID or username must be provided.");
     }
