@@ -1,18 +1,19 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { UserInputError } from "apollo-server-express";
-import { AuthService } from "../auth/auth.service";
-import { CurrentUser } from "../auth/current-user.decorator";
-import { GqlAuthGuard } from "../auth/guard/gql-auth.guard";
+import { RegisterUserDto } from "./dto/register-user.dto";
+import { AuthService } from "./auth.service";
+import { CurrentUser } from "./current-user.decorator";
+import { GqlAuthGuard } from "./guard/gql-auth.guard";
 import { LoginUserDto } from "./dto/login-user.dto";
-import { UserDto } from "./dto/user.dto";
+import { UserDto } from "../users/dto/user.dto";
 import { LoginUserInput } from "./input/login-user.input";
 import { RegisterUserInput } from "./input/register-user.input";
-import { User } from "./user.entity";
-import { UsersService } from "./users.service";
+import { User } from "../users/user.entity";
+import { UsersService } from "../users/users.service";
 
 @Resolver()
-export class UsersResolver {
+export class AuthResolver {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
@@ -37,7 +38,7 @@ export class UsersResolver {
   @Query(() => UserDto)
   @UseGuards(GqlAuthGuard)
   me(@CurrentUser() user: User) {
-    return this.usersService.findOne({ id: user.id });
+    return user;
   }
 
   @Mutation(() => LoginUserDto)
@@ -46,27 +47,49 @@ export class UsersResolver {
       loginInput.username,
       loginInput.password,
     );
+
     if (!user) {
       return new UserInputError("Username or password incorrect.");
     }
-    const { accessToken } = await this.authService.login(user);
+
+    const accessToken = await this.authService.generateAccessToken(user);
+    const refreshToken = await this.authService.generateRefreshToken(
+      user,
+      60 * 60 * 24 * 30,
+    );
+
     const payload = new LoginUserDto();
-    payload.accessToken = accessToken;
     payload.user = new UserDto(user);
+    payload.accessToken = accessToken;
+    payload.refreshToken = refreshToken;
+
     return payload;
   }
 
-  @Mutation(() => UserDto)
+  @Mutation(() => RegisterUserDto)
   async register(@Args("input") registerInput: RegisterUserInput) {
     const user = await this.authService.register(
       registerInput.username,
       registerInput.password,
     );
+
     if (!user) {
       return new UserInputError(
         `User by username ${registerInput.username} already exists.`,
       );
     }
-    return new UserDto(user);
+
+    const accessToken = await this.authService.generateAccessToken(user);
+    const refreshToken = await this.authService.generateRefreshToken(
+      user,
+      60 * 60 * 24 * 30,
+    );
+
+    const payload = new RegisterUserDto();
+    payload.user = new UserDto(user);
+    payload.accessToken = accessToken;
+    payload.refreshToken = refreshToken;
+
+    return payload;
   }
 }

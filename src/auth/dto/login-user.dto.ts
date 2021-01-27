@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Expose } from "class-transformer";
-import { UserDto } from "./user.dto";
+import { UserDto } from "../../users/dto/user.dto";
 
 @Exclude()
 @ObjectType("LoginUserPayload")
@@ -15,4 +15,9 @@ export class LoginUserDto {
   @Expose()
   @ApiProperty()
   accessToken: string;
+
+  @Field()
+  @Expose()
+  @ApiProperty()
+  refreshToken: string;
 }

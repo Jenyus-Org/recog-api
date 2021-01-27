@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { RegisterUserInput } from "./input/register-user.input";
+import { RegisterUserInput } from "../auth/input/register-user.input";
 import { User } from "./user.entity";
 
 interface FindOneArgs {

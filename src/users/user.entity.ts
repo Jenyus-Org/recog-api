@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
+import { RefreshToken } from "src/auth/refresh-token.entity";
 
 @Entity({ name: "users" })
 export class User {
@@ -27,6 +28,11 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.author, { cascade: true })
   posts: Post[];
+
+  @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user, {
+    cascade: true,
+  })
+  refreshTokens: RefreshToken[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
