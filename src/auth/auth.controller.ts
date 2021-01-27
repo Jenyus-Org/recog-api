@@ -1,12 +1,19 @@
-import { Body, Controller, Post } from "@nestjs/common";
-import { RegisterUserDto } from "./dto/registerUser.dto";
-import { UserDto } from "../users/dto/user.dto";
-import { UsersService } from "../users/users.service";
+import { Body, Controller, Post, Request, UseGuards } from "@nestjs/common";
 import { ApiCreatedResponse } from "@nestjs/swagger";
+import { UserDto } from "../users/dto/user.dto";
+import { AuthService } from "./auth.service";
+import { RegisterUserDto } from "./dto/register-user.dto";
+import { LocalAuthGuard } from "./guard/local-auth.guard";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private usersService: UsersService) {}
+  constructor(private authService: AuthService) {}
+
+  @UseGuards(LocalAuthGuard)
+  @Post("login")
+  async login(@Request() req) {
+    return this.authService.login(req.user);
+  }
 
   @Post("/register")
   @ApiCreatedResponse({
@@ -14,7 +21,10 @@ export class AuthController {
     type: UserDto,
   })
   async register(@Body() registerInput: RegisterUserDto) {
-    const user = await this.usersService.create(registerInput);
+    const user = await this.authService.register(
+      registerInput.username,
+      registerInput.password,
+    );
     return new UserDto(user);
   }
 }
