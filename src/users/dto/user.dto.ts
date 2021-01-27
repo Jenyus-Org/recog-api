@@ -20,12 +20,12 @@ export class UserDto {
   @ApiProperty()
   readonly username: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Expose()
   @ApiProperty()
   readonly firstName: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Expose()
   @ApiProperty()
   readonly lastName: string;
