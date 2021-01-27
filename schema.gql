@@ -5,17 +5,29 @@
 type User {
   id: ID!
   username: String!
-  firstName: String!
-  lastName: String!
+  firstName: String
+  lastName: String
+}
+
+type LoginUserPayload {
+  user: User!
+  accessToken: String!
 }
 
 type Query {
   hello: String!
   user(username: String, id: String): User
+  me: User!
 }
 
 type Mutation {
+  login(input: LoginUserInput!): LoginUserPayload!
   register(input: RegisterUserInput!): User!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
 }
 
 input RegisterUserInput {
