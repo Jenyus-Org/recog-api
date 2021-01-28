@@ -11,6 +11,8 @@ import { LoginUserInput } from "./input/login-user.input";
 import { RegisterUserInput } from "./input/register-user.input";
 import { User } from "../users/user.entity";
 import { UsersService } from "../users/users.service";
+import { RefreshTokenDto } from "./dto/refresh-token.dto";
+import { RefreshTokenInput } from "./input/refresh-token.input";
 
 @Resolver()
 export class AuthResolver {
@@ -62,6 +64,22 @@ export class AuthResolver {
     payload.user = new UserDto(user);
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
+
+    return payload;
+  }
+
+  @Mutation(() => RefreshTokenDto)
+  async refreshToken(@Args("input") refreshInput: RefreshTokenInput) {
+    const {
+      user,
+      token,
+    } = await this.authService.createAccessTokenFromRefreshToken(
+      refreshInput.refreshToken,
+    );
+
+    const payload = new RefreshTokenDto();
+    payload.user = new UserDto(user);
+    payload.accessToken = token;
 
     return payload;
   }

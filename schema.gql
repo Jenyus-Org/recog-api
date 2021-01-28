@@ -15,6 +15,11 @@ type LoginUserPayload {
   refreshToken: String!
 }
 
+type RefreshTokenPayload {
+  user: User!
+  accessToken: String!
+}
+
 type RegisterUserPayload {
   user: User!
   accessToken: String!
@@ -29,12 +34,17 @@ type Query {
 
 type Mutation {
   login(input: LoginUserInput!): LoginUserPayload!
+  refreshToken(input: RefreshTokenInput!): RefreshTokenPayload!
   register(input: RegisterUserInput!): RegisterUserPayload!
 }
 
 input LoginUserInput {
   username: String!
   password: String!
+}
+
+input RefreshTokenInput {
+  refreshToken: String!
 }
 
 input RegisterUserInput {
