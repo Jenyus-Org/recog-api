@@ -36,3 +36,4 @@ tmp/data.sqlite
 ormconfig.json
 .npmrc
 ormconfig.js
+.env

@@ -2,6 +2,52 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  username: String!
+  firstName: String
+  lastName: String
+}
+
+type LoginUserPayload {
+  user: User!
+  accessToken: String!
+  refreshToken: String!
+}
+
+type RefreshTokenPayload {
+  user: User!
+  accessToken: String!
+}
+
+type RegisterUserPayload {
+  user: User!
+  accessToken: String!
+  refreshToken: String!
+}
+
 type Query {
   hello: String!
+  user(username: String, id: String): User
+  me: User!
+}
+
+type Mutation {
+  login(input: LoginUserInput!): LoginUserPayload!
+  refreshToken(input: RefreshTokenInput!): RefreshTokenPayload!
+  register(input: RegisterUserInput!): RegisterUserPayload!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
+}
+
+input RefreshTokenInput {
+  refreshToken: String!
+}
+
+input RegisterUserInput {
+  username: String!
+  password: String!
 }
