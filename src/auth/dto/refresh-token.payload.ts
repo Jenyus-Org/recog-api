@@ -1,18 +1,11 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { Exclude, Expose } from "class-transformer";
-import { UserDto } from "../../../users/graphql/object/user.object";
+import { UserObject } from "src/users/dto/user.object";
 
-@Exclude()
 @ObjectType()
 export class RefreshTokenPayload {
-  @Field(() => UserDto)
-  @Expose()
-  @ApiProperty()
-  user: UserDto;
+  @Field(() => UserObject)
+  user: UserObject;
 
   @Field()
-  @Expose()
-  @ApiProperty()
   accessToken: string;
 }
