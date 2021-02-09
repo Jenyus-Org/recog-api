@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { RegisterUserInput } from "../auth/input/register-user.input";
 import { User } from "./user.entity";
 
 interface FindOneArgs {
@@ -29,7 +28,7 @@ export class UsersService {
     }
   }
 
-  async create(input: RegisterUserInput) {
+  async create(input: Partial<User>) {
     const user = this.usersRepository.create(input);
     const res = await this.usersRepository.save(user);
     return res;

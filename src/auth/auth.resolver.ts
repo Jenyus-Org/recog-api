@@ -1,49 +1,19 @@
-import { UseGuards } from "@nestjs/common";
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UserInputError } from "apollo-server-express";
-import { RegisterUserDto } from "./dto/register-user.dto";
+import { UserObject } from "../users/dto/user.object";
 import { AuthService } from "./auth.service";
-import { CurrentUser } from "./current-user.decorator";
-import { GqlAuthGuard } from "./guard/gql-auth.guard";
-import { LoginUserDto } from "./dto/login-user.dto";
-import { UserDto } from "../users/dto/user.dto";
-import { LoginUserInput } from "./input/login-user.input";
-import { RegisterUserInput } from "./input/register-user.input";
-import { User } from "../users/user.entity";
-import { UsersService } from "../users/users.service";
-import { RefreshTokenDto } from "./dto/refresh-token.dto";
-import { RefreshTokenInput } from "./input/refresh-token.input";
+import { LoginUserInput } from "./dto/login-user.input";
+import { LoginUserPayload } from "./dto/login-user.payload";
+import { RefreshTokenInput } from "./dto/refresh-token.input";
+import { RefreshTokenPayload } from "./dto/refresh-token.payload";
+import { RegisterUserInput } from "./dto/register-user.input";
+import { RegisterUserPayload } from "./dto/register-user.payload";
 
 @Resolver()
 export class AuthResolver {
-  constructor(
-    private usersService: UsersService,
-    private authService: AuthService,
-  ) {}
+  constructor(private authService: AuthService) {}
 
-  @Query(() => UserDto, { nullable: true })
-  async user(
-    @Args("id", { nullable: true }) id: string,
-    @Args("username", { nullable: true }) username?: string,
-  ) {
-    if (!id && !username) {
-      throw new UserInputError("Arguments must be one of ID or username.");
-    } else {
-      const user = await this.usersService.findOne({
-        id: id && parseInt(id),
-        username,
-      });
-      return user && new UserDto(user);
-    }
-  }
-
-  @Query(() => UserDto)
-  @UseGuards(GqlAuthGuard)
-  me(@CurrentUser() user: User) {
-    return user;
-  }
-
-  @Mutation(() => LoginUserDto)
+  @Mutation(() => LoginUserPayload)
   async login(@Args("input") loginInput: LoginUserInput) {
     const user = await this.authService.validateUser(
       loginInput.username,
@@ -60,15 +30,15 @@ export class AuthResolver {
       60 * 60 * 24 * 30,
     );
 
-    const payload = new LoginUserDto();
-    payload.user = new UserDto(user);
+    const payload = new LoginUserPayload();
+    payload.user = new UserObject(user);
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
 
     return payload;
   }
 
-  @Mutation(() => RefreshTokenDto)
+  @Mutation(() => RefreshTokenPayload)
   async refreshToken(@Args("input") refreshInput: RefreshTokenInput) {
     const {
       user,
@@ -77,14 +47,14 @@ export class AuthResolver {
       refreshInput.refreshToken,
     );
 
-    const payload = new RefreshTokenDto();
-    payload.user = new UserDto(user);
+    const payload = new RefreshTokenPayload();
+    payload.user = new UserObject(user);
     payload.accessToken = token;
 
     return payload;
   }
 
-  @Mutation(() => RegisterUserDto)
+  @Mutation(() => RegisterUserPayload)
   async register(@Args("input") registerInput: RegisterUserInput) {
     const user = await this.authService.register(
       registerInput.username,
@@ -103,8 +73,8 @@ export class AuthResolver {
       60 * 60 * 24 * 30,
     );
 
-    const payload = new RegisterUserDto();
-    payload.user = new UserDto(user);
+    const payload = new RegisterUserPayload();
+    payload.user = new UserObject(user);
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
 
