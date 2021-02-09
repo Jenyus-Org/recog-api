@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { User } from "../user.entity";
 
 @ObjectType("User")
