@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
-import { RefreshToken } from "src/auth/refresh-token.entity";
+import { RefreshToken } from "../auth/refresh-token.entity";
 
 @Entity({ name: "users" })
 export class User {

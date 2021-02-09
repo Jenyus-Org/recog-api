@@ -28,8 +28,6 @@ type RegisterUserPayload {
 
 type Query {
   hello: String!
-  user(username: String, id: String): User
-  me: User!
 }
 
 type Mutation {

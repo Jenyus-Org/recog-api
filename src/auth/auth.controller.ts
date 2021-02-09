@@ -1,14 +1,14 @@
 import { Body, Controller, Post, Request, UseGuards } from "@nestjs/common";
-import { ApiCreatedResponse, ApiOkResponse } from "@nestjs/swagger";
+import { ApiBody, ApiCreatedResponse, ApiOkResponse } from "@nestjs/swagger";
 import { UserDto } from "../users/dto/user.dto";
 import { AuthService } from "./auth.service";
-import { LoginUserDto } from "./dto/login-user.dto";
-import { RefreshTokenDto } from "./dto/refresh-token.dto";
-import { RegisterUserDto } from "./dto/register-user.dto";
+import { LoginUserBody } from "./dto/login-user.body";
+import { LoginUserResponse } from "./dto/login-user.response";
+import { RefreshTokenBody } from "./dto/refresh-token.body";
+import { RefreshTokenResponse } from "./dto/refresh-token.response";
+import { RegisterUserBody } from "./dto/register-user.body";
+import { RegisterUserResponse } from "./dto/register-user.response";
 import { LocalAuthGuard } from "./guard/local-auth.guard";
-import { LoginUserInput } from "./input/login-user.input";
-import { RefreshTokenInput } from "./input/refresh-token.input";
-import { RegisterUserInput } from "./input/register-user.input";
 
 @Controller("auth")
 export class AuthController {
@@ -16,20 +16,19 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post("login")
+  @ApiBody({ type: LoginUserBody })
   @ApiOkResponse({
     description: "User has been logged in.",
-    type: LoginUserDto,
+    type: LoginUserResponse,
   })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // used for Swagger docs, login logic performed by Password local strategy.
-  async login(@Request() req, @Body() _: LoginUserInput) {
+  async login(@Request() req) {
     const accessToken = await this.authService.generateAccessToken(req.user);
     const refreshToken = await this.authService.generateRefreshToken(
       req.user,
       60 * 60 * 24 * 30,
     );
 
-    const payload = new LoginUserDto();
+    const payload = new LoginUserResponse();
     payload.user = new UserDto(req.user);
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
@@ -40,8 +39,9 @@ export class AuthController {
   @Post("refresh")
   @ApiOkResponse({
     description: "Generates a new access token.",
+    type: RefreshTokenResponse,
   })
-  async refresh(@Body() refreshInput: RefreshTokenInput) {
+  async refresh(@Body() refreshInput: RefreshTokenBody) {
     const {
       user,
       token,
@@ -49,7 +49,7 @@ export class AuthController {
       refreshInput.refreshToken,
     );
 
-    const payload = new RefreshTokenDto();
+    const payload = new RefreshTokenResponse();
     payload.user = new UserDto(user);
     payload.accessToken = token;
 
@@ -59,9 +59,9 @@ export class AuthController {
   @Post("register")
   @ApiCreatedResponse({
     description: "User has been registered.",
-    type: RegisterUserDto,
+    type: RegisterUserResponse,
   })
-  async register(@Body() registerInput: RegisterUserInput) {
+  async register(@Body() registerInput: RegisterUserBody) {
     const user = await this.authService.register(
       registerInput.username,
       registerInput.password,
@@ -73,7 +73,7 @@ export class AuthController {
       60 * 60 * 24 * 30,
     );
 
-    const payload = new RegisterUserDto();
+    const payload = new RegisterUserResponse();
     payload.user = new UserDto(user);
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;

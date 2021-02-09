@@ -1,29 +1,24 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Exclude, Expose } from "class-transformer";
+import { Field, ID, ObjectType } from "@nestjs/graphql";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { User } from "../user.entity";
 
-@Exclude()
-export class UserDto {
+@ObjectType("User")
+export class UserObject {
   constructor(
     partial: Pick<User, "id" | "username" | "firstName" | "lastName">,
   ) {
     Object.assign(this, partial);
   }
 
-  @Expose()
-  @ApiProperty()
+  @Field(() => ID)
   readonly id: string;
 
-  @Expose()
-  @ApiProperty()
+  @Field()
   readonly username: string;
 
-  @Expose()
-  @ApiProperty()
+  @Field({ nullable: true })
   readonly firstName: string;
 
-  @Expose()
-  @ApiProperty()
+  @Field({ nullable: true })
   readonly lastName: string;
 }

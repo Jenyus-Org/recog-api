@@ -29,12 +29,12 @@ export class AuthService {
     return null;
   }
 
-  async generateAccessToken(user: Partial<User>) {
+  async generateAccessToken(user: Pick<User, "id">) {
     const payload = { subject: String(user.id) };
     return await this.jwtService.signAsync(payload);
   }
 
-  async createRefreshToken(user: Partial<User>, ttl: number) {
+  async createRefreshToken(user: Pick<User, "id">, ttl: number) {
     const expiration = new Date();
     expiration.setTime(expiration.getTime() + ttl);
 
@@ -46,7 +46,7 @@ export class AuthService {
     return await this.refreshTokenRepository.save(token);
   }
 
-  async generateRefreshToken(user: Partial<User>, expiresIn: number) {
+  async generateRefreshToken(user: Pick<User, "id">, expiresIn: number) {
     const payload = { subject: String(user.id) };
     const token = await this.createRefreshToken(user, expiresIn);
     return await this.jwtService.signAsync({
