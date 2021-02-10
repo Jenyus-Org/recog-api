@@ -35,5 +35,6 @@ lerna-debug.log*
 tmp/data.sqlite
 ormconfig.json
 .npmrc
+.yarnrc
 ormconfig.js
 .env
