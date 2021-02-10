@@ -8,7 +8,7 @@ import { User } from "./user.entity";
 import { UsersService } from "./users.service";
 
 @Resolver()
-export class AuthResolver {
+export class UsersResolver {
   constructor(private usersService: UsersService) {}
 
   @Query(() => UserObject, { nullable: true })
