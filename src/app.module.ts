@@ -7,6 +7,7 @@ import { AppResolver } from "./app.resolver";
 import { AppService } from "./app.service";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
+import { TutorialsModule } from './tutorials/tutorials.module';
 import configuration from "./config/configuration";
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import configuration from "./config/configuration";
     }),
     UsersModule,
     AuthModule,
+    TutorialsModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
