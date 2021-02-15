@@ -956,19 +956,19 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@jenyus-org/graphql-utils@^1.0.0":
-  version "1.1.0"
-  resolved "https://npm.pkg.github.com/download/@jenyus-org/graphql-utils/1.1.0/bbd8dbcb4daaba9e6e5e9856c96a4673fc16cedf2e2a4eeeb8953c66a40cfbaa#54836f9a906753055e1a0f985dd81b431ad09f6a"
-  integrity sha512-vWapo7//Sqg+0kVBxFVXGY5xn+cZmNjqxjWaPcEhpDiSNqkMPSmtb8+eaOK3Novo42s4mJ/0GNq16UIp043E5Q==
+"@jenyus-org/graphql-utils@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@jenyus-org/graphql-utils/-/graphql-utils-1.3.0.tgz#50d950ce788cf7bfc01ae1e40d68b345780ff86d"
+  integrity sha512-tkAAV0zBLxd9Jq15IBpk4I6HfgSLTVIVBbmRnWvoBxr/wZK13F1ksF9tEQpU3vsj9YGj1dWPLuXEQyqtHhdcKQ==
   dependencies:
     graphql "^15.5.0"
 
 "@jenyus-org/nestjs-graphql-utils@^1.0.0":
-  version "1.1.0"
-  resolved "https://npm.pkg.github.com/download/@jenyus-org/nestjs-graphql-utils/1.1.0/0ba1dd4ca0325cc51d14fabee3ac0191dfe0799c08b4f33a717ba2c169178636#8f89b6540b48613099b3ef60b44bc2c2d450d62a"
-  integrity sha512-kljfxTDOb1txYO+7rpAAlb0yyV+v3zcsp1x8UIHq46hgHzEK1Z9Ifn/jxgN9WVSTxOmUlDMmtFQ8izLqYPMXog==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@jenyus-org/nestjs-graphql-utils/-/nestjs-graphql-utils-1.5.0.tgz#3d45b7993b555b4b671edcd78df1a0b7da0e0c97"
+  integrity sha512-u6Un2DKJYZuzD06FrB79ukfsvRwApkKrnhhpXW84zagYF8n9/OgmzBV9kiTHyUeJyjMI5ox04/Js/UfqODnE5A==
   dependencies:
-    "@jenyus-org/graphql-utils" "^1.0.0"
+    "@jenyus-org/graphql-utils" "^1.3.0"
     "@nestjs/common" "^7.6.12"
     "@nestjs/core" "^7.6.12"
     "@nestjs/graphql" "^7.9.8"
