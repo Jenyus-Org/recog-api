@@ -4,5 +4,6 @@ import { TutorialsService } from './tutorials.service';
 
 @Module({
   controllers: [TutorialsController],
+  providers: [TutorialsService]
 })
 export class TutorialsModule {}
