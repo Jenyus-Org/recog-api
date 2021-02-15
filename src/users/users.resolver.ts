@@ -1,7 +1,7 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Query, Resolver } from "@nestjs/graphql";
 import { UserInputError } from "apollo-server-express";
-import { CurrentUser } from "../auth/current-user.decorator";
+import { GqlCurrentUser } from "../auth/gql-current-user.decorator";
 import { GqlAuthGuard } from "../auth/guard/gql-auth.guard";
 import { UserObject } from "./dto/user.object";
 import { User } from "./user.entity";
@@ -29,7 +29,7 @@ export class UsersResolver {
 
   @Query(() => UserObject)
   @UseGuards(GqlAuthGuard)
-  me(@CurrentUser() user: User) {
+  me(@GqlCurrentUser() user: User) {
     return new UserObject(user);
   }
 }

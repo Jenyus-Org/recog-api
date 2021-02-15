@@ -1,7 +1,9 @@
 import { Controller, Get, Param, Request, UseGuards } from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
+import { CurrentUser } from "src/auth/current-user.decorator";
 import { JwtAuthGuard } from "../auth/guard/jwt-auth.guard";
 import { UserDto } from "./dto/user.dto";
+import { User } from "./user.entity";
 import { UsersService } from "./users.service";
 
 @Controller("users")
@@ -24,7 +26,7 @@ export class UsersController {
     description: "Returns the logged-in user.",
     type: UserDto,
   })
-  getProfile(@Request() req) {
-    return req.user;
+  getProfile(@CurrentUser() user: User) {
+    return user && new UserDto(user);
   }
 }
