@@ -963,10 +963,10 @@
   dependencies:
     graphql "^15.5.0"
 
-"@jenyus-org/nestjs-graphql-utils@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@jenyus-org/nestjs-graphql-utils/-/nestjs-graphql-utils-1.5.0.tgz#3d45b7993b555b4b671edcd78df1a0b7da0e0c97"
-  integrity sha512-u6Un2DKJYZuzD06FrB79ukfsvRwApkKrnhhpXW84zagYF8n9/OgmzBV9kiTHyUeJyjMI5ox04/Js/UfqODnE5A==
+"@jenyus-org/nestjs-graphql-utils@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@jenyus-org/nestjs-graphql-utils/-/nestjs-graphql-utils-1.6.0.tgz#ca282cc9cfba5b6c822ea9fcdef9d23478bd5027"
+  integrity sha512-fPEWHFtmbgT+1rVUHbUrrO8/yYL1e/i3Mif0nmhcrgE7uDM/K6vs0tk6gC8UdYvpcStUWFpXRg6gPxwUv+ltLw==
   dependencies:
     "@jenyus-org/graphql-utils" "^1.3.0"
     "@nestjs/common" "^7.6.12"
