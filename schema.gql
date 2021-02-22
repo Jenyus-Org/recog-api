@@ -6,6 +6,7 @@ type Flair {
   id: ID!
   value: String!
   color: String!
+  colour: String!
 }
 
 type User {
