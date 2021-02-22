@@ -1,6 +1,5 @@
-import { User } from "src/users/user.entity";
-
 import * as bcrypt from "bcrypt";
+import { User } from "../../../users/user.entity";
 
 export const getData = () => {
   const users: Partial<User>[] = [

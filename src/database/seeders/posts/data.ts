@@ -1,6 +1,6 @@
-import { Post } from "src/posts/post.entity";
+import { Post } from "../../../posts/post.entity";
 import * as faker from "faker/locale/de_CH";
-import { User } from "src/users/user.entity";
+import { User } from "../../../users/user.entity";
 
 export const getData = () => {
   const posts: Partial<Post>[] = [
