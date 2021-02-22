@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Request, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, UseGuards } from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { CurrentUser } from "src/auth/current-user.decorator";
 import { JwtAuthGuard } from "../auth/guard/jwt-auth.guard";
