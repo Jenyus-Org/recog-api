@@ -20,10 +20,10 @@ export class AuthService {
   async validateUser(username: string, pass: string) {
     const user = await this.usersService.findOne({ username });
     if (user) {
-      const { password, ...result } = user;
+      const { password } = user;
       const match = await bcrypt.compare(pass, password);
       if (match) {
-        return result;
+        return user;
       }
     }
     return null;
