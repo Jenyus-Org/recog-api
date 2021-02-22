@@ -41,7 +41,7 @@ export class UsersResolver {
   }
 
   @ResolveField()
-  async posts(@Parent() user: UserObject) {
+  async posts(@Parent() user: User) {
     if (user.posts.length) {
       return user.posts;
     }

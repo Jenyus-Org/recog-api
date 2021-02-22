@@ -2,6 +2,7 @@ import { Selections } from "@jenyus-org/nestjs-graphql-utils";
 import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { UsersService } from "src/users/users.service";
 import { PostObject } from "./dto/post.object";
+import { Post } from "./post.entity";
 import { PostsService } from "./posts.service";
 
 @Resolver(() => PostObject)
@@ -17,10 +18,10 @@ export class PostsResolver {
   }
 
   @ResolveField()
-  async author(@Parent() post: PostObject) {
+  async author(@Parent() post: Post) {
     if (post.author) {
       return post.author;
     }
-    return await this.usersService.findOne({ postId: parseInt(post.id) });
+    return await this.usersService.findOne({ postId: post.id });
   }
 }
