@@ -17,17 +17,17 @@ export class PostsSeederService {
     const posts = getData();
     for (const post of posts) {
       const p = await this.postsRepository.save(post);
-      for (const flair of post.postToFlairs) {
+      for (const postToFlair of post.postToFlairs) {
         const f = await this.postToFlairsRepository.findOne({
           post: { id: p.id },
-          flair: { id: flair.id },
+          flair: { id: postToFlair.flair.id },
         });
         if (f) {
           continue;
         }
         await this.postToFlairsRepository.save({
           post: { id: p.id },
-          flair: { id: flair.id },
+          flair: { id: postToFlair.flair.id },
         });
       }
     }
