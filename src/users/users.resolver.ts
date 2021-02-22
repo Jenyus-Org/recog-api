@@ -42,6 +42,9 @@ export class UsersResolver {
 
   @ResolveField()
   async posts(@Parent() user: UserObject) {
+    if (user.posts.length) {
+      return user.posts;
+    }
     const { id } = user;
     return this.postsService.findAll({ authorId: parseInt(id) });
   }
