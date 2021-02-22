@@ -1,68 +1,152 @@
-import { Post } from "../../../posts/post.entity";
 import * as faker from "faker/locale/de_CH";
-import { User } from "../../../users/user.entity";
+import { DeepPartial } from "typeorm";
+import { Post } from "../../../posts/post.entity";
 
 export const getData = () => {
-  const posts: Partial<Post>[] = [
+  const posts: DeepPartial<Post>[] = [
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 1 } as User,
+      author: { id: 1 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 1 } as User,
+      author: { id: 1 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 1 } as User,
+      author: { id: 1 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 1 } as User,
+      author: { id: 1 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 1 } as User,
+      author: { id: 1 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 1 } as User,
+      author: { id: 1 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 2 } as User,
+      author: { id: 2 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 2 } as User,
+      author: { id: 2 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 2 } as User,
+      author: { id: 2 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 2 } as User,
+      author: { id: 2 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 2 } as User,
+      author: { id: 2 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
     {
       title: faker.lorem.sentence(),
       body: faker.lorem.text(),
-      author: { id: 2 } as User,
+      author: { id: 2 },
+      postToFlairs: [
+        {
+          flair: {
+            id: Math.floor(Math.random() * 5) + 1,
+          },
+        },
+      ],
     },
   ];
 

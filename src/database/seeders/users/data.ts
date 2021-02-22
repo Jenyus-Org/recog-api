@@ -1,8 +1,9 @@
 import * as bcrypt from "bcrypt";
+import { DeepPartial } from "typeorm";
 import { User } from "../../../users/user.entity";
 
 export const getData = () => {
-  const users: Partial<User>[] = [
+  const users: DeepPartial<User>[] = [
     {
       id: 1,
       username: "Doemuu",

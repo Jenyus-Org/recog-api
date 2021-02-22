@@ -12,8 +12,8 @@ export class Seeder {
   ) {}
 
   async seed() {
-    // await this.users();
-    // await this.posts();
+    await this.users();
+    await this.posts();
     await this.flairs();
   }
 
