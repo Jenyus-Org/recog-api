@@ -4,12 +4,6 @@ import { User } from "../user.entity";
 
 @ObjectType("User")
 export class UserObject {
-  constructor(
-    partial: Pick<User, "id" | "username" | "firstName" | "lastName">,
-  ) {
-    Object.assign(this, partial);
-  }
-
   @Field(() => ID)
   readonly id: string;
 

@@ -23,13 +23,13 @@ export class UsersResolver {
         id: id && parseInt(id),
         username,
       });
-      return user && new UserObject(user);
+      return user;
     }
   }
 
   @Query(() => UserObject)
   @UseGuards(GqlAuthGuard)
   me(@GqlCurrentUser() user: User) {
-    return new UserObject(user);
+    return user;
   }
 }

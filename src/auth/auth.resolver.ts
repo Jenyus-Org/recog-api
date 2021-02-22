@@ -31,7 +31,7 @@ export class AuthResolver {
     );
 
     const payload = new LoginUserPayload();
-    payload.user = new UserObject(user);
+    payload.user = user;
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
 
@@ -48,7 +48,7 @@ export class AuthResolver {
     );
 
     const payload = new RefreshTokenPayload();
-    payload.user = new UserObject(user);
+    payload.user = user;
     payload.accessToken = token;
 
     return payload;
@@ -74,7 +74,7 @@ export class AuthResolver {
     );
 
     const payload = new RegisterUserPayload();
-    payload.user = new UserObject(user);
+    payload.user = user;
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
 
