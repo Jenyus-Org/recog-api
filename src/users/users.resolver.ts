@@ -42,7 +42,7 @@ export class UsersResolver {
 
   @ResolveField()
   async posts(@Parent() user: User) {
-    if (user.posts.length) {
+    if (user.posts && user.posts.length) {
       return user.posts;
     }
     const { id } = user;
