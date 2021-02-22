@@ -2,11 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Flair {
+  id: ID!
+  value: String!
+  color: String!
+}
+
 type User {
   id: ID!
   username: String!
   firstName: String
   lastName: String
+  posts: [Post!]!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  author: User!
+  flairs: [Flair!]!
 }
 
 type LoginUserPayload {
@@ -30,6 +45,7 @@ type Query {
   hello: String!
   user(username: String, id: String): User
   me: User!
+  posts: [Post!]!
 }
 
 type Mutation {

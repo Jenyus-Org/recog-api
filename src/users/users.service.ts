@@ -6,6 +6,7 @@ import { User } from "./user.entity";
 interface FindOneArgs {
   id?: number;
   username?: string;
+  relations?: string[];
 }
 
 @Injectable()
@@ -15,9 +16,9 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findOne({ id, username }: FindOneArgs) {
+  async findOne({ id, username, relations }: FindOneArgs) {
     if (id) {
-      return await this.usersRepository.findOne(id);
+      return await this.usersRepository.findOne(id, { relations });
     } else if (username) {
       return await this.usersRepository
         .createQueryBuilder()
