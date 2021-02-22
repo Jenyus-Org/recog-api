@@ -9,6 +9,7 @@ import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
 import { TutorialsModule } from "./tutorials/tutorials.module";
 import { PostsModule } from "./posts/posts.module";
+import { FlairsModule } from "./flairs/flairs.module";
 import configuration from "./config/configuration";
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import configuration from "./config/configuration";
     AuthModule,
     TutorialsModule,
     PostsModule,
+    FlairsModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
