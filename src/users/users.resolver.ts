@@ -46,6 +46,6 @@ export class UsersResolver {
       return user.posts;
     }
     const { id } = user;
-    return this.postsService.findAll({ authorId: parseInt(id) });
+    return this.postsService.findAll({ authorId: id });
   }
 }
