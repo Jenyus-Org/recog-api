@@ -15,7 +15,7 @@ export class UsersSeederService {
     for (const user of users) {
       const u = await this.usersRepository.findOne(user.id);
       if (u) {
-        return null;
+        continue;
       }
       await this.usersRepository.save(user);
     }
