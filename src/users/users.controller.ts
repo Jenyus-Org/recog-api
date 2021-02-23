@@ -3,7 +3,7 @@ import { ApiOkResponse } from "@nestjs/swagger";
 import { CurrentUser } from "../auth/current-user.decorator";
 import { JwtAuthGuard } from "../auth/guard/jwt-auth.guard";
 import { UserDto } from "./dto/user.dto";
-import { User } from "./user.entity";
+import { User } from "./entities/user.entity";
 import { UsersService } from "./users.service";
 
 @Controller("users")

@@ -1,4 +1,4 @@
-import { User } from "../users/user.entity";
+import { User } from "../../users/entities/user.entity";
 import {
   Column,
   CreateDateColumn,
@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { PostToFlair } from "./postToFlair.entity";
-import { Comment } from "../comments/comment.entity";
+import { PostToFlair } from "../postToFlair.entity";
+import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity({ name: "posts" })
 export class Post {

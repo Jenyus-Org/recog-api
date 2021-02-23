@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindConditions, ObjectLiteral, Repository } from "typeorm";
-import { Post } from "./post.entity";
+import { Post } from "./entities/post.entity";
 
 interface FindAllArgs {
   relations?: string[];

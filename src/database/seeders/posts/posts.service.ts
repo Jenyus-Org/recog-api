@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Post } from "../../../posts/post.entity";
+import { Post } from "../../../posts/entities/post.entity";
 import { Repository } from "typeorm";
 import { getData } from "./data";
 import { PostToFlair } from "src/posts/postToFlair.entity";

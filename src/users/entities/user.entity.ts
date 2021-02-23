@@ -1,4 +1,4 @@
-import { Post } from "../posts/post.entity";
+import { Post } from "../../posts/entities/post.entity";
 import {
   Entity,
   Column,
@@ -7,8 +7,8 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
-import { RefreshToken } from "../auth/refresh-token.entity";
-import { Comment } from "../comments/comment.entity";
+import { RefreshToken } from "../../auth/refresh-token.entity";
+import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity({ name: "users" })
 export class User {

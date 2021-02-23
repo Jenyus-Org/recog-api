@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Flair } from "src/flairs/flair.entity";
+import { Flair } from "src/flairs/entities/flair.entity";
 import { Repository } from "typeorm";
 import { getData } from "./data";
 

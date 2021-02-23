@@ -6,7 +6,7 @@ import { PostsService } from "src/posts/posts.service";
 import { GqlCurrentUser } from "../auth/gql-current-user.decorator";
 import { GqlAuthGuard } from "../auth/guard/gql-auth.guard";
 import { UserObject } from "./dto/user.object";
-import { User } from "./user.entity";
+import { User } from "./entities/user.entity";
 import { UsersService } from "./users.service";
 
 @Resolver(() => UserObject)

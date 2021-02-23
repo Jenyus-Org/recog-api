@@ -3,7 +3,7 @@ import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { FlairsService } from "src/flairs/flairs.service";
 import { UsersService } from "src/users/users.service";
 import { PostObject } from "./dto/post.object";
-import { Post } from "./post.entity";
+import { Post } from "./entities/post.entity";
 import { PostsService } from "./posts.service";
 
 @Resolver(() => PostObject)

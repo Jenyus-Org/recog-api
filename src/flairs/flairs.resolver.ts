@@ -1,6 +1,6 @@
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
 import { FlairObject } from "./dto/flair.object";
-import { Flair } from "./flair.entity";
+import { Flair } from "./entities/flair.entity";
 
 @Resolver(() => FlairObject)
 export class FlairsResolver {

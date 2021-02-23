@@ -1,8 +1,8 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { FlairObject } from "../../flairs/dto/flair.object";
-import { Flair } from "../../flairs/flair.entity";
+import { Flair } from "../../flairs/entities/flair.entity";
 import { UserObject } from "../../users/dto/user.object";
-import { User } from "../../users/user.entity";
+import { User } from "../../users/entities/user.entity";
 
 @ObjectType("Post")
 export class PostObject {

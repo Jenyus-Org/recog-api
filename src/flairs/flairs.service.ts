@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Flair } from "./flair.entity";
+import { Flair } from "./entities/flair.entity";
 
 interface FindAllArgs {
   postId?: number;
