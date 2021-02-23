@@ -2,6 +2,7 @@ import { Selections } from "@jenyus-org/nestjs-graphql-utils";
 import { UseGuards } from "@nestjs/common";
 import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { UserInputError } from "apollo-server-express";
+import { PostObject } from "src/posts/dto/post.object";
 import { PostsService } from "src/posts/posts.service";
 import { GqlCurrentUser } from "../auth/gql-current-user.decorator";
 import { GqlAuthGuard } from "../auth/guard/gql-auth.guard";
@@ -40,7 +41,7 @@ export class UsersResolver {
     return user;
   }
 
-  @ResolveField()
+  @ResolveField(() => [PostObject])
   async posts(@Parent() user: User) {
     if (user.posts && user.posts.length) {
       return user.posts;

@@ -1,6 +1,4 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
-import { PostObject } from "../../posts/dto/post.object";
-import { Post } from "../../posts/entities/post.entity";
 
 @ObjectType("User")
 export class UserObject {
@@ -15,7 +13,4 @@ export class UserObject {
 
   @Field({ nullable: true })
   readonly lastName: string;
-
-  @Field(() => [PostObject])
-  readonly posts: Post[];
 }

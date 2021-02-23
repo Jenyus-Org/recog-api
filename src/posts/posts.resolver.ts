@@ -1,6 +1,8 @@
 import { HasFields, Selections } from "@jenyus-org/nestjs-graphql-utils";
 import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { FlairObject } from "src/flairs/dto/flair.object";
 import { FlairsService } from "src/flairs/flairs.service";
+import { UserObject } from "src/users/dto/user.object";
 import { UsersService } from "src/users/users.service";
 import { PostObject } from "./dto/post.object";
 import { Post } from "./entities/post.entity";
@@ -25,7 +27,7 @@ export class PostsResolver {
     return await this.postsService.findAll({ relations });
   }
 
-  @ResolveField()
+  @ResolveField(() => UserObject)
   async author(@Parent() post: Post) {
     if (post.author) {
       return post.author;
@@ -33,7 +35,7 @@ export class PostsResolver {
     return await this.usersService.findOne({ postId: post.id });
   }
 
-  @ResolveField()
+  @ResolveField(() => [FlairObject])
   async flairs(@Parent() post: Post) {
     if (post.postToFlairs) {
       return post.postToFlairs.map((postToFlair) => postToFlair.flair);
