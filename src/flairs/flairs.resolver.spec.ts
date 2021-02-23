@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { FlairsResolver } from './flairs.resolver';
+import { Test, TestingModule } from "@nestjs/testing";
+import { FlairsResolver } from "./flairs.resolver";
 
-describe('FlairsResolver', () => {
+describe("FlairsResolver", () => {
   let resolver: FlairsResolver;
 
   beforeEach(async () => {
@@ -12,7 +12,7 @@ describe('FlairsResolver', () => {
     resolver = module.get<FlairsResolver>(FlairsResolver);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(resolver).toBeDefined();
   });
 });

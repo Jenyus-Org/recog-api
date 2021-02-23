@@ -9,7 +9,8 @@ const getPostToFlairs = () => {
 };
 
 export const getData = () => {
-  return [...Array(10)].map(() => ({
+  return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) => ({
+    id,
     title: faker.lorem.sentence(),
     body: faker.lorem.text(),
     author: { id: Math.floor(Math.random() * 2) + 1 },
