@@ -1,6 +1,6 @@
 import { forwardRef, Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { PostsModule } from "src/posts/posts.module";
+import { PostsModule } from "../posts/posts.module";
 import { User } from "./entities/user.entity";
 import { UsersController } from "./users.controller";
 import { UsersResolver } from "./users.resolver";
