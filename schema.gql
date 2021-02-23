@@ -9,6 +9,11 @@ type Flair {
   colour: String!
 }
 
+type Comment {
+  id: ID!
+  body: String!
+}
+
 type User {
   id: ID!
   username: String!
@@ -23,6 +28,7 @@ type Post {
   body: String!
   author: User!
   flairs: [Flair!]!
+  comments: [Comment!]!
 }
 
 type LoginUserPayload {
