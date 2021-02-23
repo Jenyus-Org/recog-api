@@ -9,15 +9,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Post } from "src/posts/entities/post.entity";
+import { Post } from "../../posts/entities/post.entity";
 
 @Entity({ name: "comments" })
 export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  title: string;
 
   @Column()
   body: string;
