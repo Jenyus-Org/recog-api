@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { RefreshToken } from "../auth/refresh-token.entity";
+import { Comment } from "../comments/comment.entity";
 
 @Entity({ name: "users" })
 export class User {
@@ -28,6 +29,11 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.author, { cascade: true })
   posts: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.author, {
+    cascade: true,
+  })
+  comments: Comment[];
 
   @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user, {
     cascade: true,

@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { PostToFlair } from "./postToFlair.entity";
+import { Comment } from "../comments/comment.entity";
 
 @Entity({ name: "posts" })
 export class Post {
@@ -25,6 +26,11 @@ export class Post {
   @ManyToOne(() => User, (user) => user.posts, { onDelete: "CASCADE" })
   @JoinColumn({ name: "author_id" })
   author: User;
+
+  @OneToMany(() => Comment, (comment) => comment.parentPost, {
+    cascade: true,
+  })
+  comments: Comment[];
 
   @OneToMany(() => PostToFlair, (postToFlair) => postToFlair.post)
   postToFlairs: PostToFlair[];
