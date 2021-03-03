@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { PostToFlair } from "../postToFlair.entity";
+import { PostToFlair } from "./postToFlair.entity";
 import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity({ name: "posts" })

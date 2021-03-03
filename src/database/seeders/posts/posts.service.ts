@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Post } from "../../../posts/entities/post.entity";
 import { Repository } from "typeorm";
 import { getData } from "./data";
-import { PostToFlair } from "../../../posts/postToFlair.entity";
+import { PostToFlair } from "../../../posts/entities/postToFlair.entity";
 
 @Injectable()
 export class PostsSeederService {

@@ -1,4 +1,4 @@
-import { Flair } from "../flairs/entities/flair.entity";
+import { Flair } from "../../flairs/entities/flair.entity";
 import {
   CreateDateColumn,
   Entity,
@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Post } from "./entities/post.entity";
+import { Post } from "./post.entity";
 
 @Entity({ name: "posts_flairs" })
 export class PostToFlair {
