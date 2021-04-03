@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import * as bcrypt from "bcrypt";
 import { TokenExpiredError } from "jsonwebtoken";
 import { Repository } from "typeorm";
-import { User } from "../users/user.entity";
+import { User } from "../users/entities/user.entity";
 import { UsersService } from "../users/users.service";
 import { RefreshToken } from "./refresh-token.entity";
 
@@ -20,10 +20,10 @@ export class AuthService {
   async validateUser(username: string, pass: string) {
     const user = await this.usersService.findOne({ username });
     if (user) {
-      const { password, ...result } = user;
+      const { password } = user;
       const match = await bcrypt.compare(pass, password);
       if (match) {
-        return result;
+        return user;
       }
     }
     return null;

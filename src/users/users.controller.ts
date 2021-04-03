@@ -1,9 +1,9 @@
-import { Controller, Get, Param, Request, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, UseGuards } from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
-import { CurrentUser } from "src/auth/current-user.decorator";
+import { CurrentUser } from "../auth/current-user.decorator";
 import { JwtAuthGuard } from "../auth/guard/jwt-auth.guard";
 import { UserDto } from "./dto/user.dto";
-import { User } from "./user.entity";
+import { User } from "./entities/user.entity";
 import { UsersService } from "./users.service";
 
 @Controller("users")

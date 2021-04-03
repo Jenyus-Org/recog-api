@@ -38,3 +38,5 @@ ormconfig.json
 .yarnrc
 ormconfig.js
 .env
+tsconfig.tsbuildinfo
+tsconfig.build.tsbuildinfo

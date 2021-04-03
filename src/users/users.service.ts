@@ -1,11 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { User } from "./user.entity";
+import { User } from "./entities/user.entity";
 
 interface FindOneArgs {
   id?: number;
   username?: string;
+  relations?: string[];
+  postId?: number;
 }
 
 @Injectable()
@@ -15,14 +17,21 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findOne({ id, username }: FindOneArgs) {
+  async findOne({ id, username, relations, postId }: FindOneArgs) {
     if (id) {
-      return await this.usersRepository.findOne(id);
+      return await this.usersRepository.findOne(id, { relations });
     } else if (username) {
       return await this.usersRepository
         .createQueryBuilder()
         .where("LOWER(username) = LOWER(:username)", { username })
         .getOne();
+    } else if (postId) {
+      return await this.usersRepository.findOne({
+        join: { alias: "users", innerJoin: { posts: "users.posts" } },
+        where: (qb) => {
+          qb.where("posts.id = :postId", { postId });
+        },
+      });
     } else {
       throw new Error("One of ID or username must be provided.");
     }

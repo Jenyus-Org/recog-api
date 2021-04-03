@@ -1,6 +1,5 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UserInputError } from "apollo-server-express";
-import { UserObject } from "../users/dto/user.object";
 import { AuthService } from "./auth.service";
 import { LoginUserInput } from "./dto/login-user.input";
 import { LoginUserPayload } from "./dto/login-user.payload";
@@ -31,7 +30,7 @@ export class AuthResolver {
     );
 
     const payload = new LoginUserPayload();
-    payload.user = new UserObject(user);
+    payload.user = user;
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
 
@@ -48,7 +47,7 @@ export class AuthResolver {
     );
 
     const payload = new RefreshTokenPayload();
-    payload.user = new UserObject(user);
+    payload.user = user;
     payload.accessToken = token;
 
     return payload;
@@ -74,7 +73,7 @@ export class AuthResolver {
     );
 
     const payload = new RegisterUserPayload();
-    payload.user = new UserObject(user);
+    payload.user = user;
     payload.accessToken = accessToken;
     payload.refreshToken = refreshToken;
 

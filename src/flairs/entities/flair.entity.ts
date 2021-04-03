@@ -1,4 +1,4 @@
-import { PostToFlair } from "../posts/postToFlair.entity";
+import { PostToFlair } from "../../posts/entities/postToFlair.entity";
 import {
   Column,
   CreateDateColumn,

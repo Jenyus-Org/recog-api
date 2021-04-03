@@ -1,4 +1,4 @@
-import { User } from "../users/user.entity";
+import { User } from "../../users/entities/user.entity";
 import {
   Column,
   CreateDateColumn,
@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { PostToFlair } from "./postToFlair.entity";
+import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity({ name: "posts" })
 export class Post {
@@ -25,6 +26,11 @@ export class Post {
   @ManyToOne(() => User, (user) => user.posts, { onDelete: "CASCADE" })
   @JoinColumn({ name: "author_id" })
   author: User;
+
+  @OneToMany(() => Comment, (comment) => comment.parentPost, {
+    cascade: true,
+  })
+  comments: Comment[];
 
   @OneToMany(() => PostToFlair, (postToFlair) => postToFlair.post)
   postToFlairs: PostToFlair[];

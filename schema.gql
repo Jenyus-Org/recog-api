@@ -2,11 +2,34 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  author: User!
+  flairs: [Flair!]!
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: ID!
+  body: String!
+  post: Post!
+}
+
+type Flair {
+  id: ID!
+  value: String!
+  color: String!
+  colour: String!
+}
+
 type User {
   id: ID!
   username: String!
   firstName: String
   lastName: String
+  posts: [Post!]!
 }
 
 type LoginUserPayload {
@@ -30,12 +53,20 @@ type Query {
   hello: String!
   user(username: String, id: String): User
   me: User!
+  posts: [Post!]!
+  comment(id: String!): Comment!
 }
 
 type Mutation {
+  createPost(input: CreatePostInput!): Post!
   login(input: LoginUserInput!): LoginUserPayload!
   refreshToken(input: RefreshTokenInput!): RefreshTokenPayload!
   register(input: RegisterUserInput!): RegisterUserPayload!
+}
+
+input CreatePostInput {
+  title: String!
+  body: String!
 }
 
 input LoginUserInput {

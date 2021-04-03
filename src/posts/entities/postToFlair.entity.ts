@@ -1,4 +1,4 @@
-import { Flair } from "../flairs/flair.entity";
+import { Flair } from "../../flairs/entities/flair.entity";
 import {
   CreateDateColumn,
   Entity,
