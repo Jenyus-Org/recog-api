@@ -19,15 +19,16 @@ export class PostsService {
     private postsRepository: Repository<Post>,
   ) {}
 
-  async findAll({ relations, authorId }: FindAllArgs) {
+  findAll({ relations, authorId }: FindAllArgs) {
     let where: ObjectLiteral | FindConditions<Post> = {};
     if (authorId) {
       where = { ...where, author: { id: authorId } };
     }
-    return await this.postsRepository.find({ relations, where });
+    return this.postsRepository.find({ relations, where });
   }
 
-  async findOne({ id, relations }: FindOneArgs) {
-    return await this.postsRepository.findOne(id, { relations });
+  findOne({ id, relations }: FindOneArgs) {
+    return this.postsRepository.findOne(id, { relations });
+  }
   }
 }
