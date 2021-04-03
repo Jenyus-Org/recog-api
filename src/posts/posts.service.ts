@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindConditions, ObjectLiteral, Repository } from "typeorm";
+import { User } from "../users/entities/user.entity";
+import { CreatePostInput } from "./dto/create-post.input";
 import { Post } from "./entities/post.entity";
 
 interface FindAllArgs {
@@ -30,5 +32,9 @@ export class PostsService {
   findOne({ id, relations }: FindOneArgs) {
     return this.postsRepository.findOne(id, { relations });
   }
+
+  create(author: User, input: CreatePostInput) {
+    const post = this.postsRepository.create({ author, ...input });
+    return this, this.postsRepository.save(post);
   }
 }

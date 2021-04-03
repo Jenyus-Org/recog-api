@@ -58,9 +58,15 @@ type Query {
 }
 
 type Mutation {
+  createPost(input: CreatePostInput!): Post!
   login(input: LoginUserInput!): LoginUserPayload!
   refreshToken(input: RefreshTokenInput!): RefreshTokenPayload!
   register(input: RegisterUserInput!): RegisterUserPayload!
+}
+
+input CreatePostInput {
+  title: String!
+  body: String!
 }
 
 input LoginUserInput {
