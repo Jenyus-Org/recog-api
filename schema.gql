@@ -35,17 +35,25 @@ type User {
 type LoginUserPayload {
   user: User!
   accessToken: String!
+  accessTokenExpiresAt: DateTime!
   refreshToken: String!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type RefreshTokenPayload {
   user: User!
   accessToken: String!
+  accessTokenExpiresAt: DateTime!
 }
 
 type RegisterUserPayload {
   user: User!
   accessToken: String!
+  accessTokenExpiresAt: DateTime!
   refreshToken: String!
 }
 

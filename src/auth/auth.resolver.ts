@@ -1,3 +1,5 @@
+import { HasFields } from "@jenyus-org/nestjs-graphql-utils";
+import { ConfigService } from "@nestjs/config";
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UserInputError } from "apollo-server-express";
 import { AuthService } from "./auth.service";
@@ -10,10 +12,18 @@ import { RegisterUserPayload } from "./dto/register-user.payload";
 
 @Resolver()
 export class AuthResolver {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private configService: ConfigService,
+  ) {}
 
   @Mutation(() => LoginUserPayload)
-  async login(@Args("input") loginInput: LoginUserInput) {
+  async login(
+    @Args("input") loginInput: LoginUserInput,
+    @HasFields("login.accessToken") generateAccessToken: boolean,
+    @HasFields("login.refreshToken") generateRefreshToken: boolean,
+    @HasFields("login.accessTokenExpiresAt") getAccessTokenExpiresAt: boolean,
+  ) {
     const user = await this.authService.validateUser(
       loginInput.username,
       loginInput.password,
@@ -23,22 +33,42 @@ export class AuthResolver {
       return new UserInputError("Username or password incorrect.");
     }
 
-    const accessToken = await this.authService.generateAccessToken(user);
-    const refreshToken = await this.authService.generateRefreshToken(
-      user,
-      60 * 60 * 24 * 30,
-    );
-
     const payload = new LoginUserPayload();
     payload.user = user;
-    payload.accessToken = accessToken;
-    payload.refreshToken = refreshToken;
+
+    if (generateAccessToken) {
+      const accessToken = await this.authService.generateAccessToken(user);
+      payload.accessToken = accessToken;
+    }
+
+    if (getAccessTokenExpiresAt) {
+      const accessTokenExpiresAt = new Date();
+      console.log(this.configService.get<number>("auth.jwtKeyExpiresIn"));
+      accessTokenExpiresAt.setSeconds(
+        accessTokenExpiresAt.getSeconds() +
+          this.configService.get<number>("auth.jwtKeyExpiresIn"),
+      );
+      payload.accessTokenExpiresAt = accessTokenExpiresAt;
+      console.log(accessTokenExpiresAt.toLocaleDateString());
+    }
+
+    if (generateRefreshToken) {
+      const refreshToken = await this.authService.generateRefreshToken(
+        user,
+        60 * 60 * 24 * 30,
+      );
+      payload.refreshToken = refreshToken;
+    }
 
     return payload;
   }
 
   @Mutation(() => RefreshTokenPayload)
-  async refreshToken(@Args("input") refreshInput: RefreshTokenInput) {
+  async refreshToken(
+    @Args("input") refreshInput: RefreshTokenInput,
+    @HasFields("refreshToken.accessTokenExpiresAt")
+    getAccessTokenExpiresAt: boolean,
+  ) {
     const {
       user,
       token,
@@ -50,11 +80,26 @@ export class AuthResolver {
     payload.user = user;
     payload.accessToken = token;
 
+    if (getAccessTokenExpiresAt) {
+      const accessTokenExpiresAt = new Date();
+      accessTokenExpiresAt.setSeconds(
+        accessTokenExpiresAt.getSeconds() +
+          this.configService.get<number>("auth.jwtKeyExpiresIn"),
+      );
+      payload.accessTokenExpiresAt = accessTokenExpiresAt;
+    }
+
     return payload;
   }
 
   @Mutation(() => RegisterUserPayload)
-  async register(@Args("input") registerInput: RegisterUserInput) {
+  async register(
+    @Args("input") registerInput: RegisterUserInput,
+    @HasFields("register.accessToken") generateAccessToken: boolean,
+    @HasFields("register.refreshToken") generateRefreshToken: boolean,
+    @HasFields("register.accessTokenExpiresAt")
+    getAccessTokenExpiresAt: boolean,
+  ) {
     const user = await this.authService.register(
       registerInput.username,
       registerInput.password,
@@ -66,16 +111,30 @@ export class AuthResolver {
       );
     }
 
-    const accessToken = await this.authService.generateAccessToken(user);
-    const refreshToken = await this.authService.generateRefreshToken(
-      user,
-      60 * 60 * 24 * 30,
-    );
-
     const payload = new RegisterUserPayload();
     payload.user = user;
-    payload.accessToken = accessToken;
-    payload.refreshToken = refreshToken;
+
+    if (generateAccessToken) {
+      const accessToken = await this.authService.generateAccessToken(user);
+      payload.accessToken = accessToken;
+    }
+
+    if (getAccessTokenExpiresAt) {
+      const accessTokenExpiresAt = new Date();
+      accessTokenExpiresAt.setSeconds(
+        accessTokenExpiresAt.getSeconds() +
+          this.configService.get<number>("auth.jwtKeyExpiresIn"),
+      );
+      payload.accessTokenExpiresAt = accessTokenExpiresAt;
+    }
+
+    if (generateRefreshToken) {
+      const refreshToken = await this.authService.generateRefreshToken(
+        user,
+        60 * 60 * 24 * 30,
+      );
+      payload.refreshToken = refreshToken;
+    }
 
     return payload;
   }
