@@ -11,5 +11,8 @@ export class LoginUserPayload {
   accessToken: string;
 
   @Field()
+  accessTokenExpiresAt: Date;
+
+  @Field()
   refreshToken: string;
 }

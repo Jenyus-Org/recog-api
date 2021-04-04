@@ -1,12 +1,7 @@
-import { Field, ObjectType } from "@nestjs/graphql";
-import { UserObject } from "../../users/dto/user.object";
-import { User } from "../../users/entities/user.entity";
+import { ObjectType, OmitType } from "@nestjs/graphql";
+import { LoginUserPayload } from "./login-user.payload";
 
 @ObjectType()
-export class RefreshTokenPayload {
-  @Field(() => UserObject)
-  user: User;
-
-  @Field()
-  accessToken: string;
-}
+export class RefreshTokenPayload extends OmitType(LoginUserPayload, [
+  "refreshToken",
+] as const) {}
