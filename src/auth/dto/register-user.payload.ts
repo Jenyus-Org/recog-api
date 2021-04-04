@@ -1,15 +1,5 @@
-import { Field, ObjectType } from "@nestjs/graphql";
-import { UserObject } from "../../users/dto/user.object";
-import { User } from "../../users/entities/user.entity";
+import { ObjectType } from "@nestjs/graphql";
+import { LoginUserPayload } from "./login-user.payload";
 
 @ObjectType()
-export class RegisterUserPayload {
-  @Field(() => UserObject)
-  user: User;
-
-  @Field()
-  accessToken: string;
-
-  @Field()
-  refreshToken: string;
-}
+export class RegisterUserPayload extends LoginUserPayload {}
