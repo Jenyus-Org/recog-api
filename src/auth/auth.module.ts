@@ -19,7 +19,9 @@ import { RefreshToken } from "./refresh-token.entity";
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>("auth.jwtKey"),
-        signOptions: { expiresIn: "15m" },
+        signOptions: {
+          expiresIn: configService.get<number>("auth.jwtKeyExpiresIn"),
+        },
       }),
       inject: [ConfigService],
     }),
