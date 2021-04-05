@@ -49,11 +49,10 @@ export class AuthService {
   async generateRefreshToken(user: Pick<User, "id">, expiresIn: number) {
     const payload = { subject: String(user.id) };
     const token = await this.createRefreshToken(user, expiresIn);
-    return await this.jwtService.signAsync({
-      ...payload,
-      expiresIn,
-      jwtId: String(token.id),
-    });
+    return await this.jwtService.signAsync(
+      { ...payload, jwtId: String(token.id) },
+      { expiresIn },
+    );
   }
 
   async resolveRefreshToken(encoded: string) {
